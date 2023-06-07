@@ -1,0 +1,329 @@
+:root {
+    --clr-primary: hsl(259, 100%, 65%);
+    --clr-secondary: hsl(0, 100%, 67%);
+    --clr-neutral-white: hsl(0, 0%, 100%);
+    --clr-neutral-lgrey: hsl(0, 0%, 86%);
+    --clr-neutral-sgrey: hsl(0, 1%, 44%);
+    --clr-neutral-black: hsl(0, 0%, 8%);
+
+    --ff-family: 'Poppins', sans-serif;
+
+    --fw-regular: 400;
+    --fw-semi: 700;
+    --fw-bold: 800;
+
+    --fs-200: 1rem;
+    --fs-400: 2rem;
+    --fs-600: 3.5rem;
+
+    --pd-200: 1.5rem;/*24px*/
+    --pd-400: 3rem;
+}
+
+.show{
+    display: block;
+}
+
+.hide{
+    display: none!important;
+}
+
+.error{
+    border-color: var(--clr-secondary);
+}
+
+/* utility classes */
+.flex-column {
+    display: flex;
+    flex-direction: column;
+}
+
+.flex-row {
+    display: flex;
+}
+
+.center {
+    justify-content: center;
+}
+
+.space-bt {
+    justify-content: space-between;
+}
+
+.year-wrapper,
+.month-wrapper,
+.day-wrapper {
+    display: flex;
+    margin-bottom: 2rem;
+}
+
+.year,
+.month,
+.day {
+    line-height: 1em;
+    display: inline-block;
+    overflow: hidden;
+    width: 0.6em;
+    height: 1em;
+}
+
+.date-display{
+    line-height: 1em;
+}
+
+.date-designation {
+    line-height: 1em;
+    margin-left: 1rem;
+}
+
+.text-clr-purple {
+    color: var(--clr-primary);
+}
+
+.text-clr-purple.animateNumbers {
+    word-break: break-all;
+    display: block;
+    overflow: inherit;
+}
+
+.animateNumbers {
+    animation: animate 0.5s steps(10) forwards infinite;
+}
+
+.animateNumbers::before {
+    content: attr(data-attr);
+    display: inline-block;
+    width: 100%;
+    height: auto;
+}
+
+@keyframes animate {
+    100% {
+        transform: translate3d(0, -10em, 0);
+    }
+}
+
+
+
+
+.bg-clr-purple {
+    color: var(--clr-primary);
+}
+
+.text-error-clr {
+    color: var(--clr-secondary);
+}
+
+.text-dark {
+    color: var(--clr-neutral-black)
+}
+
+.text-sgrey {
+    color: var(--clr-neutral-sgrey)
+}
+
+.bg-clr-lgrey {
+    color: var(--clr-neutral-lgrey)
+}
+
+.border-error-clr {
+    border-color: var(--clr-secondary);
+}
+
+.fw-regular {
+    font-weight: var(--fw-regular);
+}
+
+.fw-semi {
+    font-weight: var(--fw-semi);
+}
+
+.fw-bold {
+    font-weight: var(--fw-bold);
+}
+
+.f-family {
+    font-family: var(--ff-family);
+}
+
+.fs-200 {
+    font-size: var(--fs-200);
+}
+
+.fs-400 {
+    font-size: var(--fs-400);
+}
+
+.fs-600 {
+    font-size: var(--fs-600);
+}
+
+
+/*-----------------------*/
+
+/*css reset*/
+
+/* Box sizing rules */
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+}
+
+/* Remove default margin */
+* {
+    margin: 0;
+    padding: 0;
+}
+
+/* Remove list styles on ul, ol elements with a list role, which suggests default styling will be removed */
+ul[role='list'],
+ol[role='list'] {
+    list-style: none;
+}
+
+/* Set core root defaults */
+html:focus-within {
+    scroll-behavior: smooth;
+}
+
+/* Set core body defaults */
+
+html,
+body {
+    height: 100%;
+    background-color: var(--clr-neutral-lgrey);
+    font-family: var(--ff-family);
+}
+
+body {
+    text-rendering: optimizeSpeed;
+    line-height: 1.5;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-content: center;
+}
+
+/* A elements that don't have a class get default styles */
+a:not([class]) {
+    text-decoration-skip-ink: auto;
+}
+
+/* Make images easier to work with */
+img,
+picture,
+svg {
+    max-width: 100%;
+    display: block;
+}
+
+
+
+/* Remove all animations, transitions and smooth scroll for people that prefer not to see them */
+@media (prefers-reduced-motion: reduce) {
+    html:focus-within {
+        scroll-behavior: auto;
+    }
+
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
+    }
+}
+
+/*css reset*/
+
+/*Page style*/
+
+section {
+    background-color: var(--clr-neutral-white);
+    min-width: 22.8125rem;
+    /*365px*/
+    border-radius: 2rem 2rem 8rem 2rem;
+    padding: var(--pd-200);
+    margin: 0.5rem;
+}
+
+/*form*/
+
+label {
+    display: block;
+}
+
+.form-container {
+    border-bottom: 1px solid var(--clr-neutral-lgrey);
+    position: relative;
+    margin-bottom: var(--pd-400);
+}
+
+.form-container img {
+    width: 4rem;
+    height: 4rem;
+    background-color: var(--clr-primary);
+    border-radius: 4rem;
+    padding: 1.2rem;
+    position: absolute;
+    /* ------- */
+    right: 0;
+    left: 0;
+    /* center absolute element*/
+    margin: auto;
+    /* ------- */
+    bottom: -2rem;
+}
+
+form {
+    padding-bottom: var(--pd-200);
+    margin-block: var(--pd-400);
+}
+
+.input-item {
+    width: 6rem;
+}
+
+input {
+    width: 100%;
+    height: 3rem;
+    margin-right: var(--pd-200);
+    border-radius: 0.5rem;
+    border: 1px solid var(--clr-neutral-lgrey);
+    padding-left: 1.5rem;
+}
+
+input::-webkit-inner-spin-button {
+    /*remove the arrows of number type */
+    -webkit-appearance: none;
+}
+
+.form-container .input-item:last-child input {
+    padding-left: 0.5rem;
+}
+
+
+@media (min-width:50em) {
+
+    section {
+        width: 37.5rem;
+        justify-content: flex-start;
+        padding-inline: var(--pd-400);
+    }
+
+    .space-bt {
+        justify-content: flex-start;
+    }
+
+    .space-bt>.input-item {
+        margin-right: var(--pd-200);
+    }
+
+    .form-container img {
+        right: 0;
+        left: auto;
+        margin: 0;
+    }
+}

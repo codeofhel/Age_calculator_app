@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- displays site properly based on user's device -->
+  <link rel="icon" type="image/png" sizes="32x32" href="./assets/images/favicon-32x32.png">
+  <title>Frontend Mentor | Age calculator app</title>
+  <!-- Feel free to remove these styles or customise in your own stylesheet 👍 -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,700;1,400;1,800&display=swap"
+    rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+  <style>
+    .attribution {
+      font-size: 11px;
+      text-align: center;
+    }
+
+    .attribution a {
+      color: hsl(228, 45%, 44%);
+    }
+  </style>
+</head>
+
+<body>
+  <main>
+    <section>
+      <div class="container">
+        <div class="flex-column even-columns">
+          <div class="form-container">
+            <form action="#">
+              <div class="flex-row space-bt">
+                <div class="input-item">
+                  <label for="day" class="fs-200 fw-semi text-sgrey">DAY</label>
+                  <input type="number" name="day" id="day" class="fs-400 text-dark fw-semi" min="01" max="31"
+                    placeholder="01" maxlength="2" onkeydown="initialValues.validateDate(event)" required>
+                </div>
+                <div class="input-item">
+                  <label for="month" class="fs-200 fw-semi text-sgrey">MONTH</label>
+                  <input type="number" name="month" id="month" class="fs-400 text-dark fw-semi" min="01" max="12"
+                    placeholder="01" maxlength="2" onkeydown="initialValues.validateDate(event)" required>
+                </div>
+                <div class="input-item">
+                  <label for="year" class="fs-200 fw-semi text-sgrey">YEAR</label>
+                  <input type="number" name="year" id="year" class="fs-400 text-dark fw-semi" min="1900"
+                    placeholder="2020" maxlength="4" onkeydown="initialValues.validateDate(event)" required>
+                </div>
+              </div>
+            </form>
+            <div onclick="initialValues.calculateAge()"><img src="./assets/images/icon-arrow.svg" alt="" srcset=""
+                class="cta__calc_age"></div>
+          </div>
+          <div class=" flex-column fs-600">
+            <div class="year-wrapper">
+              <div class="year">
+                <span class="text-clr-purple" data-attr="123456789">-</span>
+              </div>
+              <div class="year">
+                <span class="text-clr-purple" data-attr="954713596">-</span>
+              </div>
+              <span class="text-clr-purple date-display"></span>
+              <div class="date-designation"><span>years</span></div>
+            </div>
+            <div class="month-wrapper">
+              <div class="month">
+                <span class="text-clr-purple" data-attr="159372486">-</span>
+              </div>
+              <div class="month">
+                <span class="text-clr-purple" data-attr="654698413">-</span>
+              </div>
+              <span class="text-clr-purple date-display"></span>
+              <div class="date-designation"><span>months</span></div>
+            </div>
+            <div class="day-wrapper">
+              <div class="day">
+                <span class="text-clr-purple" data-attr="987715413">-</span>
+              </div>
+              <div class="day">
+                <span class="text-clr-purple" data-attr="142579358">-</span>
+              </div>
+              <span class="text-clr-purple date-display"></span>
+              <div class="date-designation"><span>days</span></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+  <script src="script.js"></script>
+</body>
+
+</html>
