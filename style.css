@@ -16,19 +16,20 @@
     --fs-400: 2rem;
     --fs-600: 3.5rem;
 
-    --pd-200: 1.5rem;/*24px*/
+    --pd-200: 1.5rem;
+    /*24px*/
     --pd-400: 3rem;
 }
 
-.show{
+.show {
     display: block;
 }
 
-.hide{
-    display: none!important;
+.hide {
+    display: none !important;
 }
 
-.error{
+.error {
     border-color: var(--clr-secondary);
 }
 
@@ -67,7 +68,7 @@
     height: 1em;
 }
 
-.date-display{
+.date-display {
     line-height: 1em;
 }
 

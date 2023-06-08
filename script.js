@@ -13,7 +13,7 @@ function DateInput(day, month, year) {
 
 
 
-function DateController(evt) {
+function DateController() {
     const date = new Date();
     const dayInput = document.querySelector("#day");
     const monthInput = document.querySelector("#month");
@@ -40,21 +40,21 @@ function DateController(evt) {
         "year": date.getFullYear()
     }
 
-    function setInitialDate() {
-        dayInput.value = today.day;
-        monthInput.value = today.month;
-        yearInput.value = today.year;
-    }
-
     setInitialDate();
 
     let day = parseInt(dayInput.value);
     let month = parseInt(monthInput.value);
     let year = parseInt(yearInput.value);
 
-    yearInput.setAttribute("max", date.getFullYear());
+    yearInput.setAttribute("max", date.getFullYear()); //set max to year dynamically
 
-    function validateInput(evt) {
+    function setInitialDate() {
+        dayInput.value = today.day;
+        monthInput.value = today.month;
+        yearInput.value = today.year;
+    }
+
+    function validateInputAtkeyDown(evt) {
         if (evt.key != "Backspace" && evt.key != "Tab" && !evt.key.includes("Arrow"))
             if (isNaN(parseInt(evt.key)) || parseInt(evt.currentTarget.value + evt.key) > parseInt(evt.currentTarget.max) || evt.currentTarget.value.length > parseInt(evt.currentTarget.maxLength))
                 return false;
@@ -64,10 +64,12 @@ function DateController(evt) {
 
     function validateDate(evt) {
 
-        if (validateInput(evt)) {
+        if (validateInputAtkeyDown(evt)) {
             day = evt.currentTarget.id == "day" ? parseInt(`${dayInput.value}${evt.key}`) : parseInt(dayInput.value);
             month = evt.currentTarget.id == "month" ? parseInt(`${monthInput.value}${evt.key}`) : parseInt(monthInput.value)
             year = evt.currentTarget.id == "year" ? parseInt(`${yearInput.value}${evt.key}`) : parseInt(yearInput.value)
+
+            /*validate leap year*/
 
             const dt = new DateInput(day, month, year);
             const monthName = Object.keys(monthList)[month - 1];
@@ -86,43 +88,49 @@ function DateController(evt) {
                         evt.preventDefault()
                 }
             }
+            /*------------------------ */
+
         } else {
             evt.preventDefault();
         }
     }
 
-    function HandleErrors(elem) {
-        if (isNaN(elem[0].value) || elem[0].value < parseInt(elem[0].attributes.min.value) || elem[0].value > parseInt(elem[0].attributes.max.value)) {
-            elem[0].classList.add("error")
-            return false;
-        }
-        return true;
+    const HandleErrors = (elems) => {
+        return Array.from(elems).map((elem) => {
+            if (isNaN(elem.value) || elem.value < parseInt(elem.attributes.min.value) || elem.value > parseInt(elem.attributes.max.value)) {
+                elem.classList.add("error")
+                return false;
+            } else {
+                return true;
+            }
+        })
+
     }
 
     function calculateAge() {
 
         document.querySelectorAll("input").forEach((elem) => elem.classList.remove("error"));
-        const yearInput = document.querySelectorAll("#year")
-        const monthInput = document.querySelectorAll("#month")
-        const dayInput = document.querySelectorAll("#day")
-
-        if (!HandleErrors(dayInput) || !HandleErrors(monthInput) || !HandleErrors(yearInput))
-            return false;
-        
-        const yearItem = document.querySelectorAll(".year")
-        const monthItem = document.querySelectorAll(".month")
-        const dayItem = document.querySelectorAll(".day")
-        const day_display = document.querySelectorAll(".date-display")
-
-        yearItem.forEach(elem => elem.classList.remove("hide"));
-        monthItem.forEach(elem => elem.classList.remove("hide"));
-        dayItem.forEach(elem => elem.classList.remove("hide"));
-        day_display.forEach(elem => elem.textContent = "");
-
+        const dateInput = document.querySelectorAll("input")
 
         const yearDisplay = document.querySelector(".year-wrapper .date-display")
         const monthDisplay = document.querySelector(".month-wrapper .date-display")
         const dayDisplay = document.querySelector(".day-wrapper .date-display")
+
+        /*Verifica se inputs tem erros de data*/
+        const inputResult = HandleErrors(dateInput);
+        if (!inputResult.every(elem => elem == true))
+            return false;
+
+        /*---------------------------------- */
+
+        const dtTimeAnim = document.querySelectorAll(".dt-time-animation");
+        dtTimeAnim.forEach(elem => elem.classList.remove("hide"));
+
+        const day_display = document.querySelectorAll(".date-display")
+        day_display.forEach(elem => elem.textContent = "");
+
+
+        /*----------Calculos para ano, mês e dia---------------- */
 
         const currentDay = new Date(`${today.year}-${today.month}-${today.day}`);
 
@@ -151,11 +159,13 @@ function DateController(evt) {
             dias += ultimoDiaMesAnterior;
         }
 
+        /*---------------------------------------*/
+
         document.querySelectorAll(".text-clr-purple").forEach((elem) => {
             elem.classList.add("animateNumbers");
             setTimeout(() => {
                 elem.classList.remove("animateNumbers");
-                document.querySelectorAll(".year,.month,.day").forEach((elem) => elem.classList.add("hide"))
+                dtTimeAnim.forEach((elem) => elem.classList.add("hide"))
                 yearDisplay.textContent = anos;
                 monthDisplay.textContent = meses;
                 dayDisplay.textContent = dias
